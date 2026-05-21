@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "more_wathe",
+  "version": "${version}",
+  "name": "More Wathe",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/more_wathe/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "xyz.busterbrown1218.more_wathe.client.MoreWatheDataGenerator"
+    ],
+    "client": [
+      "xyz.busterbrown1218.more_wathe.client.MoreWatheClient"
+    ],
+    "main": [
+      "xyz.busterbrown1218.more_wathe.MoreWathe"
+    ]
+  },
+  "mixins": [
+    "more_wathe.mixins.json",
+    {
+      "config": "more_wathe.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
