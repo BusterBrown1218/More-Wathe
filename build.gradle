@@ -82,8 +82,6 @@ dependencies {
 
     modRuntimeOnly "maven.modrinth:simple-voice-chat:fabric-${voicechat_version}"
     modRuntimeOnly "de.maxhenkel.voicechat:voicechat-api:${voicechat_api_version}:fabric-stub"
-
-    implementation 'com.google.code.gson:gson:2.14.0'
 }
 
 processResources {

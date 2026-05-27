@@ -1,6 +1,5 @@
 package xyz.busterbrown1218.more_wathe;
 
-import com.google.gson.Gson;
 import dev.doctor4t.wathe.api.Role;
 import dev.doctor4t.wathe.api.WatheRoles;
 import dev.doctor4t.wathe.index.WatheItems;
@@ -14,12 +13,10 @@ import org.agmas.harpymodloader.events.ResetPlayerEvent;
 import org.agmas.harpymodloader.modifiers.HMLModifiers;
 import org.agmas.harpymodloader.modifiers.Modifier;
 import org.agmas.noellesroles.Noellesroles;
+import xyz.busterbrown1218.more_wathe.config.ConfigCommands;
 import xyz.busterbrown1218.more_wathe.config.ConfigFile;
 
 import java.awt.*;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,46 +40,12 @@ public class MoreWathe implements ModInitializer {
     public static EntityAttributeModifier bigModifier;
     public static EntityAttributeModifier fastModifier;
 
-    public static Gson gson = new Gson();
-    private static FileWriter writer;
-    public static ConfigFile configFile;
-
     @Override
     public void onInitialize() {
-        loadConfig();
+        ConfigFile.HANDLER.load();
         registerAttributes();
         registerEvents();
-    }
-
-    public void loadConfig() {
-        // Definitely not handling edge cases here, will update
-        if (!ConfigFile.configFile.exists()) {
-            configFile = new ConfigFile();
-            try {
-                writer = new FileWriter(ConfigFile.configFile);
-                gson.toJson(configFile, writer);
-                writer.flush();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            FileReader reader;
-            try {
-                reader = new FileReader(ConfigFile.configFile);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            configFile = gson.fromJson(reader, ConfigFile.class);
-        }
-    }
-
-    public static void saveConfig() {
-        gson.toJson(configFile, writer);
-        try {
-            writer.flush();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        ConfigCommands.registerCommands();
     }
 
     public void registerAttributes() {

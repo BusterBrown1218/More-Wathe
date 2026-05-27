@@ -1,40 +1,28 @@
 package xyz.busterbrown1218.more_wathe.config;
 
+import com.google.gson.GsonBuilder;
+import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
+import dev.isxander.yacl3.config.v2.api.SerialEntry;
+import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import net.fabricmc.loader.api.FabricLoader;
-
-import java.io.File;
+import net.minecraft.util.Identifier;
+import xyz.busterbrown1218.more_wathe.MoreWathe;
 
 public class ConfigFile {
-    public static final transient File configFile = FabricLoader.getInstance().getConfigDir().resolve("morewathe.json5").toFile();
+    public static ConfigClassHandler<ConfigFile> HANDLER = ConfigClassHandler.<ConfigFile>createBuilder(ConfigFile.class)
+            .id(Identifier.of(MoreWathe.MOD_ID, "config"))
+            .serializer(config -> GsonConfigSerializerBuilder.create(config)
+                    .setPath(FabricLoader.getInstance().getConfigDir().resolve("morewathe.json5"))
+                    .appendGsonBuilder(GsonBuilder::setPrettyPrinting)
+                    .setJson5(true)
+                    .build()).build();
 
-    private boolean preventOtherPlayersWakeup;
-    private boolean hideDisabledRoles;
-    private boolean hideDisabledModifiers;
-
-    public ConfigFile() {
-        preventOtherPlayersWakeup = true;
-        hideDisabledRoles = true;
-        hideDisabledModifiers = true;
-    }
-
-    public boolean getPreventOtherPlayersWakeup() {
-        return preventOtherPlayersWakeup;
-    }
-    public void setPreventOtherPlayersWakeup(boolean preventOtherPlayersWakeup) {
-        this.preventOtherPlayersWakeup = preventOtherPlayersWakeup;
-    }
-
-    public boolean getHideDisabledRoles() {
-        return hideDisabledRoles;
-    }
-    public void setHideDisabledRoles(boolean hideDisabledRoles) {
-        this.hideDisabledRoles = hideDisabledRoles;
-    }
-
-    public boolean getHideDisabledModifiers() {
-        return hideDisabledModifiers;
-    }
-    public void setHideDisabledModifiers(boolean hideDisabledModifiers) {
-        this.hideDisabledModifiers = hideDisabledModifiers;
-    }
+    @SerialEntry
+    public boolean preventOtherPlayersWakeup = true;
+    @SerialEntry
+    public boolean hideDisabledRoles = true;
+    @SerialEntry
+    public boolean hideDisabledModifiers = true;
+    @SerialEntry
+    public boolean hideMood = false;
 }
