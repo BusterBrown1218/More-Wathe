@@ -6,7 +6,9 @@
   "client": [
     "HideDisabledMixin",
     "EscapistHudMixin",
-    "MoodRenderMixin"
+    "MoodRenderMixin",
+    "ExtendedClientConfigMixin",
+    "ExtendedScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

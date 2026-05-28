@@ -15,6 +15,7 @@ import org.agmas.harpymodloader.modifiers.Modifier;
 import org.agmas.noellesroles.Noellesroles;
 import xyz.busterbrown1218.more_wathe.config.ConfigCommands;
 import xyz.busterbrown1218.more_wathe.config.ConfigFile;
+import xyz.busterbrown1218.more_wathe.config.ExtendedConfigHelper;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class MoreWathe implements ModInitializer {
         registerAttributes();
         registerEvents();
         ConfigCommands.registerCommands();
+        ExtendedConfigHelper.registerEntries();
     }
 
     public void registerAttributes() {

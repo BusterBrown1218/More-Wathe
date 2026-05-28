@@ -6,5 +6,10 @@
   "announcement.goals.morewathe.escapist": "Easily get away from a kill",
   "announcement.role.morewathe.escapist": "Escapist",
   "announcement.goals.morewathe.marksman": "Pose as a vigilante",
-  "announcement.role.morewathe.marksman": "Marksman"
+  "announcement.role.morewathe.marksman": "Marksman",
+
+  "gui.morewathe.config.category.client.opt.hideDisabledRoles": "Hide Disabled Roles",
+  "gui.morewathe.config.category.client.opt.hideDisabledRoles.desc": "Prevents the guidebook from showing roles that are currently disabled.",
+  "gui.morewathe.config.category.client.opt.hideDisabledModifiers": "Hide Disabled Modifiers",
+  "gui.morewathe.config.category.client.opt.hideDisabledModifiers.desc": "Prevents the guidebook from showing modifiers that are currently disabled."
 }
