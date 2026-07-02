@@ -4,11 +4,14 @@
   "package": "xyz.busterbrown1218.more_wathe.client.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "HideDisabledMixin",
     "EscapistHudMixin",
-    "MoodRenderMixin",
     "ExtendedClientConfigMixin",
-    "ExtendedScreenMixin"
+    "ExtendedModifiersConfigMixin",
+    "ExtendedRolesConfigMixin",
+    "ExtendedScreenMixin",
+    "GameConfigMixin",
+    "HideDisabledMixin",
+    "MoodRenderMixin"
   ],
   "injectors": {
     "defaultRequire": 1

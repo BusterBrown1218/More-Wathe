@@ -8,6 +8,8 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
 import xyz.busterbrown1218.more_wathe.MoreWathe;
 
+import java.util.HashMap;
+
 public class ConfigFile {
     public static ConfigClassHandler<ConfigFile> HANDLER = ConfigClassHandler.<ConfigFile>createBuilder(ConfigFile.class)
             .id(Identifier.of(MoreWathe.MOD_ID, "config"))
@@ -25,4 +27,8 @@ public class ConfigFile {
     public boolean hideDisabledModifiers = true;
     @SerialEntry
     public boolean hideMood = false;
+    @SerialEntry
+    public HashMap<String, Double> modifierChances = new HashMap<String, Double>();
+    @SerialEntry
+    public HashMap<String, Double> roleChances = new HashMap<String, Double>();
 }

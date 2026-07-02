@@ -4,8 +4,9 @@
   "package": "xyz.busterbrown1218.more_wathe.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "WakeupMixin",
-    "EscapistMixin"
+    "EscapistMixin",
+    "RoleAndModifierWeights",
+    "WakeupMixin"
   ],
   "injectors": {
     "defaultRequire": 1
