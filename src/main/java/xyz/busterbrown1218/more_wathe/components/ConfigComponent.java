@@ -1,4 +1,4 @@
-package xyz.busterbrown1218.more_wathe.config;
+package xyz.busterbrown1218.more_wathe.components;
 
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
@@ -9,6 +9,7 @@ import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
 import xyz.busterbrown1218.more_wathe.MoreWathe;
+import xyz.busterbrown1218.more_wathe.config.ConfigFile;
 
 import java.util.HashMap;
 

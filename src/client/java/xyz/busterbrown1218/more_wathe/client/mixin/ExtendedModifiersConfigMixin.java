@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import xyz.busterbrown1218.more_wathe.config.ConfigComponent;
+import xyz.busterbrown1218.more_wathe.components.ConfigComponent;
 
 import java.util.Map;
 import java.util.function.BiConsumer;

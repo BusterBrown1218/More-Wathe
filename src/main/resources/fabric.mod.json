@@ -25,7 +25,9 @@
   },
   "custom": {
     "cardinal-components": [
-      "morewathe:config"
+      "morewathe:config",
+      "morewathe:ability",
+      "morewathe:escapist"
     ]
   },
   "mixins": [

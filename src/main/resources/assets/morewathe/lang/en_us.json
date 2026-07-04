@@ -13,5 +13,12 @@
   "gui.morewathe.config.category.client.opt.hideDisabledModifiers": "Hide Disabled Modifiers",
   "gui.morewathe.config.category.client.opt.hideDisabledModifiers.desc": "Prevents the guidebook from showing modifiers that are currently disabled.",
   "gui.morewathe.config.category.options.opt.hideMood": "Hide Mood",
-  "gui.morewathe.config.category.options.opt.hideMood.desc": "When disabled, players may only see their objectives, not their sanity.\n\n§6Default: §cDisabled"
+  "gui.morewathe.config.category.options.opt.hideMood.desc": "When disabled, players may only see their objectives, not their sanity.\n\n§6Default: §cDisabled",
+
+  "tip.escapist.place": "Use %s to save your location!",
+  "tip.escapist.teleport": "Use %s to teleport!",
+  "tip.escapist.not_enough_money": "100\uE781 required to teleport.",
+  "tip.morewathe.cooldown": "Ability usable in %ss",
+
+  "key.morewathe.ability": "Ability"
 }
