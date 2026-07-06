@@ -2,6 +2,7 @@ package xyz.busterbrown1218.more_wathe.client.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import dev.doctor4t.wathe.api.Role;
 import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.client.gui.MoodRenderer;
 import net.minecraft.client.MinecraftClient;
@@ -25,7 +26,8 @@ public class MoodRenderMixin {
     private static int drawText(DrawContext instance, TextRenderer textRenderer, Text text, int x, int y, int color, Operation<Integer> original) {
         if (MinecraftClient.getInstance().player == null) return original.call(instance, textRenderer, text, x, y, color);
         PlayerEntity player = MinecraftClient.getInstance().player;
-        if (ConfigComponent.KEY.get(player.getWorld()).hideMood && GameWorldComponent.KEY.get(player.getWorld()).isInnocent(player)) {
+        if (GameWorldComponent.KEY.get(player.getWorld()).getRole(player) == null) return original.call(instance, textRenderer, text, x, y, color);
+        if (ConfigComponent.KEY.get(player.getWorld()).hideMood && GameWorldComponent.KEY.get(player.getWorld()).getRole(player).getMoodType() == Role.MoodType.REAL) {
             x = 5;
         }
         return original.call(instance, textRenderer, text, x, y, color);

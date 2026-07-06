@@ -2,11 +2,14 @@
   "announcement.modifier.morewathe.big": "Big",
   "announcement.modifier.morewathe.locksmith": "Locksmith",
   "announcement.modifier.morewathe.fast": "Fast",
+  "announcement.modifier.morewathe.warbled": "Warbled",
 
   "announcement.goals.morewathe.escapist": "Easily get away from a kill",
   "announcement.role.morewathe.escapist": "Escapist",
   "announcement.goals.morewathe.marksman": "Pose as a vigilante",
   "announcement.role.morewathe.marksman": "Marksman",
+  "announcement.role.morewathe.guardian_angel": "Guardian Angel",
+  "announcement.goals.morewathe.guardian_angel": "Don't let your player die!",
 
   "gui.morewathe.config.category.client.opt.hideDisabledRoles": "Hide Disabled Roles",
   "gui.morewathe.config.category.client.opt.hideDisabledRoles.desc": "Prevents the guidebook from showing roles that are currently disabled.",
@@ -18,6 +21,11 @@
   "tip.escapist.place": "Use %s to save your location!",
   "tip.escapist.teleport": "Use %s to teleport!",
   "tip.escapist.not_enough_money": "100\uE781 required to teleport.",
+  "tip.guardian_angel.not_enough_money": "100\uE781 required to protect.",
+  "tip.guardian_angel.protect": "Use %s to protect!",
+  "tip.guardian_angel.objective": "Don't let %s die",
+  "tip.has_guardian_angel": "You have a guardian angel!",
+  "tip.has_guardian_angel.protected": "You're shielded for %ss!",
   "tip.morewathe.cooldown": "Ability usable in %ss",
 
   "key.morewathe.ability": "Ability"

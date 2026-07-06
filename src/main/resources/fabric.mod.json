@@ -21,13 +21,17 @@
     ],
     "cardinal-components": [
       "xyz.busterbrown1218.more_wathe.MoreWatheComponents"
+    ],
+    "voicechat": [
+      "xyz.busterbrown1218.more_wathe.MoreWatheVoicePlugin"
     ]
   },
   "custom": {
     "cardinal-components": [
       "morewathe:config",
       "morewathe:ability",
-      "morewathe:escapist"
+      "morewathe:escapist",
+      "morewathe:guardian_angel"
     ]
   },
   "mixins": [

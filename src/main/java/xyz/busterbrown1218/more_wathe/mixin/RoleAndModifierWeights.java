@@ -3,13 +3,20 @@ package xyz.busterbrown1218.more_wathe.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.doctor4t.wathe.api.Role;
+import dev.doctor4t.wathe.cca.GameWorldComponent;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import org.agmas.harpymodloader.Harpymodloader;
 import org.agmas.harpymodloader.modded_murder.ModdedMurderGameMode;
 import org.agmas.harpymodloader.modifiers.HMLModifiers;
 import org.agmas.harpymodloader.modifiers.Modifier;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import xyz.busterbrown1218.more_wathe.MoreWathe;
 import xyz.busterbrown1218.more_wathe.config.ConfigFile;
 
 import java.util.ArrayList;
@@ -19,6 +26,16 @@ import java.util.Random;
 
 @Mixin(ModdedMurderGameMode.class)
 public class RoleAndModifierWeights {
+    @Inject(method = "initializeGame", at = @At(value = "HEAD"))
+    private void checkPlayerCount(ServerWorld serverWorld, GameWorldComponent gameWorldComponent, List<ServerPlayerEntity> players, CallbackInfo ci) {
+        // sorry if this causes trouble to other mods that set role maximums
+        if (players.size() < 8) {
+            Harpymodloader.setRoleMaximum(MoreWathe.GUARDIAN_ANGEL, 0);
+        } else {
+            Harpymodloader.setRoleMaximum(MoreWathe.GUARDIAN_ANGEL, 1);
+        }
+    }
+
     @Redirect(method = "assignModifiers", at = @At(value = "FIELD", target = "Lorg/agmas/harpymodloader/modifiers/HMLModifiers;MODIFIERS:Ljava/util/ArrayList;", opcode = Opcodes.GETSTATIC))
     private ArrayList<Modifier> shuffledModifiers() {
         ArrayList<Modifier> reshuffledModifiers = new ArrayList<>(HMLModifiers.MODIFIERS);

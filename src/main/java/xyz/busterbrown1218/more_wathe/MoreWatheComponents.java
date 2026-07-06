@@ -9,6 +9,7 @@ import org.ladysnake.cca.api.v3.world.WorldComponentInitializer;
 import xyz.busterbrown1218.more_wathe.components.AbilityPlayerComponent;
 import xyz.busterbrown1218.more_wathe.components.ConfigComponent;
 import xyz.busterbrown1218.more_wathe.components.EscapistPlayerComponent;
+import xyz.busterbrown1218.more_wathe.components.GuardianAngelPlayerComponent;
 
 public class MoreWatheComponents implements EntityComponentInitializer, WorldComponentInitializer {
     public MoreWatheComponents() {
@@ -22,5 +23,6 @@ public class MoreWatheComponents implements EntityComponentInitializer, WorldCom
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
         registry.beginRegistration(PlayerEntity.class, EscapistPlayerComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(EscapistPlayerComponent::new);
         registry.beginRegistration(PlayerEntity.class, AbilityPlayerComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(AbilityPlayerComponent::new);
+        registry.beginRegistration(PlayerEntity.class, GuardianAngelPlayerComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(GuardianAngelPlayerComponent::new);
     }
 }

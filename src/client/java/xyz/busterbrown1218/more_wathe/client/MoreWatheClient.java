@@ -28,7 +28,7 @@ public class MoreWatheClient implements ClientModInitializer {
         registerAbilityPackets();
     }
 
-    private static final Role[] abilityUsers = new Role[]{MoreWathe.ESCAPIST};
+    private static final Role[] abilityUsers = new Role[]{MoreWathe.ESCAPIST, MoreWathe.GUARDIAN_ANGEL};
 
     public static void registerAbilityPackets() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {

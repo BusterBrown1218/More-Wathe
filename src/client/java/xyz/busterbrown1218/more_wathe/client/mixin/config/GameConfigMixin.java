@@ -1,4 +1,4 @@
-package xyz.busterbrown1218.more_wathe.client.mixin;
+package xyz.busterbrown1218.more_wathe.client.mixin.config;
 
 import cat.rezelyn.watheextended.client.screen.config.OptionsCategory;
 import com.llamalad7.mixinextras.sugar.Local;
