@@ -17,6 +17,11 @@
   "gui.morewathe.config.category.client.opt.hideDisabledModifiers.desc": "Prevents the guidebook from showing modifiers that are currently disabled.",
   "gui.morewathe.config.category.options.opt.hideMood": "Hide Mood",
   "gui.morewathe.config.category.options.opt.hideMood.desc": "When disabled, players may only see their objectives, not their sanity.\n\n§6Default: §cDisabled",
+  "gui.morewathe.config.category.options.roles.guardian_angel.group": "Guardian Angel",
+  "gui.morewathe.config.category.options.roles.guardian_angel.killer_chance": "Guardian Killer Chance",
+  "gui.morewathe.config.category.options.roles.guardian_angel.killer_chance.desc": "Percent chance that the guardian angel is assigned a killer to protect\n\n§6Default: §750%",
+  "gui.morewathe.config.category.options.roles.guardian_angel.guardianDefaultsToAmnesiac" : "Guardian Defaults to Amnesiac",
+  "gui.morewathe.config.category.options.roles.guardian_angel.guardianDefaultsToAmnesiac.desc": "When disabled, guardians change to civilians if their target dies.\n\n§6Default: §aEnabled",
 
   "tip.escapist.place": "Use %s to save your location!",
   "tip.escapist.teleport": "Use %s to teleport!",

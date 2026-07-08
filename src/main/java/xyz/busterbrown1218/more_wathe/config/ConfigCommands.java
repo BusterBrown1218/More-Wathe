@@ -3,6 +3,7 @@ package xyz.busterbrown1218.more_wathe.config;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.DoubleArgumentType;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import dev.doctor4t.wathe.api.Role;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.text.Text;
@@ -61,6 +62,26 @@ public class ConfigCommands {
                                                 context.getSource().sendFeedback(() -> Text.literal(role.identifier().toString() + " weight set to " + weight), true);
                                                 return Command.SINGLE_SUCCESS;
                                             })))))
+                    .then(literal("guardianKillerChance")
+                            .requires(source -> source.hasPermissionLevel(2))
+                            .then(argument("value", IntegerArgumentType.integer(0, 100))
+                                    .executes(context -> {
+                                        int value = IntegerArgumentType.getInteger(context, "value");
+                                        ConfigFile.HANDLER.instance().guardianKillerChance = value;
+                                        ConfigFile.HANDLER.save();
+                                        context.getSource().sendFeedback(() -> Text.literal("Guardian killer chance set to " + value), true);
+                                        return Command.SINGLE_SUCCESS;
+                                    })))
+                    .then(literal("guardianDefaultsToAmnesiac")
+                            .requires(source -> source.hasPermissionLevel(2))
+                            .then(argument("value", BoolArgumentType.bool())
+                                    .executes(context ->  {
+                                        boolean value = BoolArgumentType.getBool(context, "value");
+                                        ConfigFile.HANDLER.instance().guardianDefaultsToAmnesiac = value;
+                                        ConfigFile.HANDLER.save();
+                                        context.getSource().sendFeedback(() -> Text.literal("guardianDefaultsToAmnesiac: " + value), true);
+                                        return Command.SINGLE_SUCCESS;
+                                    })))
             );
         });
     }

@@ -96,8 +96,8 @@ public class MoreWathe implements ModInitializer {
             } else if (role.equals(GUARDIAN_ANGEL)) {
                 GameWorldComponent gameWorldComponent = GameWorldComponent.KEY.get(playerEntity.getWorld());
                 List<UUID> potentialProtectees;
-                // 50/50 to have their protectee to be a killer
-                if (random.nextBoolean()) {
+
+                if (random.nextInt(101) > 100 - ConfigFile.HANDLER.instance().guardianKillerChance) {
                     potentialProtectees = gameWorldComponent.getAllKillerTeamPlayers();
                 } else {
                     potentialProtectees = new ArrayList<>();

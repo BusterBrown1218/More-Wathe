@@ -28,6 +28,10 @@ public class ConfigFile {
     @SerialEntry
     public boolean hideMood = false;
     @SerialEntry
+    public int guardianKillerChance = 50;
+    @SerialEntry
+    public boolean guardianDefaultsToAmnesiac = true;
+    @SerialEntry
     public HashMap<String, Double> modifierChances = new HashMap<String, Double>();
     @SerialEntry
     public HashMap<String, Double> roleChances = new HashMap<String, Double>();
