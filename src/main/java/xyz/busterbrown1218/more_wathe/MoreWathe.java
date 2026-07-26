@@ -1,18 +1,15 @@
 package xyz.busterbrown1218.more_wathe;
 
-import dev.doctor4t.wathe.Wathe;
 import dev.doctor4t.wathe.api.Role;
 import dev.doctor4t.wathe.api.WatheRoles;
 import dev.doctor4t.wathe.api.event.AllowPlayerDeath;
 import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.cca.PlayerShopComponent;
-import dev.doctor4t.wathe.client.WatheClient;
 import dev.doctor4t.wathe.game.GameConstants;
 import dev.doctor4t.wathe.game.GameConstants.DeathReasons;
 import dev.doctor4t.wathe.game.GameFunctions;
 import dev.doctor4t.wathe.index.WatheItems;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -27,6 +24,7 @@ import org.agmas.harpymodloader.modifiers.Modifier;
 import xyz.busterbrown1218.more_wathe.components.AbilityPlayerComponent;
 import xyz.busterbrown1218.more_wathe.components.EscapistPlayerComponent;
 import xyz.busterbrown1218.more_wathe.components.GuardianAngelPlayerComponent;
+import xyz.busterbrown1218.more_wathe.components.TelepathPlayerComponent;
 import xyz.busterbrown1218.more_wathe.config.ConfigCommands;
 import xyz.busterbrown1218.more_wathe.config.ConfigFile;
 import xyz.busterbrown1218.more_wathe.packet.AbilityC2SPacket;
@@ -46,6 +44,7 @@ public class MoreWathe implements ModInitializer {
     public static Identifier LOCKSMITH_ID = Identifier.of(MOD_ID, "locksmith");
     public static Identifier FAST_ID = Identifier.of(MOD_ID, "fast");
     public static Identifier WARBLED_ID = Identifier.of(MOD_ID, "warbled");
+    public static Identifier TELEPATH_ID = Identifier.of(MOD_ID, "telepath");
 
     public static Role ESCAPIST = WatheRoles.registerRole(new Role(ESCAPIST_ID, new Color(170, 50, 50).getRGB(), false, true, Role.MoodType.FAKE, Integer.MAX_VALUE, true));
     public static Role MARKSMAN = WatheRoles.registerRole(new Role(MARKSMAN_ID, new Color(65, 15, 85).getRGB(), false, true, Role.MoodType.FAKE, Integer.MAX_VALUE, true));
@@ -56,6 +55,7 @@ public class MoreWathe implements ModInitializer {
     public static Modifier LOCKSMITH = HMLModifiers.registerModifier(new Modifier(LOCKSMITH_ID, new Color(100, 25, 25).getRGB(), null,null,true,false));
     public static Modifier FAST = HMLModifiers.registerModifier(new Modifier(FAST_ID, new Color(60, 221, 198).getRGB(), null,null,false,false));
     public static Modifier WARBLED = HMLModifiers.registerModifier(new Modifier(WARBLED_ID, new Color(100, 185, 190).getRGB(), null, null, false, false));
+    public static Modifier TELEPATH = HMLModifiers.registerModifier(new Modifier(TELEPATH_ID, new Color(200, 105, 200).getRGB(), null, null, true, false));
 
     public static EntityAttributeModifier bigModifier;
     public static EntityAttributeModifier fastModifier;
@@ -114,18 +114,22 @@ public class MoreWathe implements ModInitializer {
                 GuardianAngelPlayerComponent protectedComponent = GuardianAngelPlayerComponent.KEY.get(playerEntity.getWorld().getPlayerByUuid(guardianComponent.protecting));
                 protectedComponent.hasGuardian = true;
                 protectedComponent.sync();
+            } else if (role.equals(ESCAPIST)) {
+                EscapistPlayerComponent.KEY.get(playerEntity).reset();
             }
         });
         ResetPlayerEvent.EVENT.register(playerEntity -> {
             playerEntity.getAttributeInstance(EntityAttributes.GENERIC_SCALE).removeModifier(bigModifier);
             playerEntity.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).removeModifier(fastModifier);
             GuardianAngelPlayerComponent.KEY.get(playerEntity).reset();
+            TelepathPlayerComponent.KEY.get(playerEntity).reset();
         });
         AllowPlayerDeath.EVENT.register((victim, killer, deathReason) -> {
             if (!(GuardianAngelPlayerComponent.KEY.get(victim).isProtected > 0)) return true;
             // may later add modded death reasons, or config to choose which deaths are protected
             return !protectedDeathReasons.contains(deathReason);
         });
+
         ServerPlayNetworking.registerGlobalReceiver(AbilityC2SPacket.ID, ((payload, context) -> {
             AbilityPlayerComponent abilityComponent = (AbilityPlayerComponent) AbilityPlayerComponent.KEY.get(context.player());
             GameWorldComponent gameWorldComponent = (GameWorldComponent) GameWorldComponent.KEY.get(context.player().getWorld());

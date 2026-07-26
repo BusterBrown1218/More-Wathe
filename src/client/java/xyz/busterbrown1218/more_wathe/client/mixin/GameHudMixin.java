@@ -9,6 +9,9 @@ import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.ColorHelper;
+import net.minecraft.util.math.MathHelper;
+import org.agmas.harpymodloader.component.WorldModifierComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -20,6 +23,7 @@ import xyz.busterbrown1218.more_wathe.client.MoreWatheClient;
 import xyz.busterbrown1218.more_wathe.components.AbilityPlayerComponent;
 import xyz.busterbrown1218.more_wathe.components.EscapistPlayerComponent;
 import xyz.busterbrown1218.more_wathe.components.GuardianAngelPlayerComponent;
+import xyz.busterbrown1218.more_wathe.components.TelepathPlayerComponent;
 
 import java.awt.*;
 
@@ -28,13 +32,14 @@ public abstract class GameHudMixin {
     @Shadow
     public abstract TextRenderer getTextRenderer();
 
-    @Inject(method = "render", at = @At("TAIL"))
+    @Inject(method = "renderMainHud", at = @At("TAIL"))
     public void drawHud(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         PlayerEntity player = MinecraftClient.getInstance().player;
         GameWorldComponent gameWorldComponent = (GameWorldComponent) GameWorldComponent.KEY.get(player.getWorld());
         if (gameWorldComponent.isRole(player, MoreWathe.ESCAPIST)) drawEscapistHud(context);
         if (gameWorldComponent.isRole(player, MoreWathe.GUARDIAN_ANGEL)) drawGuardianHud(context, player);
         if (GuardianAngelPlayerComponent.KEY.get(player).hasGuardian) drawGuardedHud(context);
+        if (WorldModifierComponent.KEY.get(player.getWorld()).isModifier(player, MoreWathe.TELEPATH)) drawTelepathHud(context, player, tickCounter.getTickDelta(true));
     }
 
     // straight from Noelle's roles
@@ -94,5 +99,20 @@ public abstract class GameHudMixin {
         if (guardianAngelPlayerComponent.isProtected > 0) line = Text.translatable("tip.has_guardian_angel.protected", guardianAngelPlayerComponent.isProtected / 20);
 
         context.drawTextWithShadow(getTextRenderer(), line, context.getScaledWindowWidth() - getTextRenderer().getWidth(line) - 1, 16, MoreWathe.GUARDIAN_ANGEL.color());
+    }
+
+    @Unique
+    void drawTelepathHud(DrawContext context, PlayerEntity player, float delta) {
+        TelepathPlayerComponent telepathPlayerComponent = TelepathPlayerComponent.KEY.get(player);
+
+        for (int i = 0; i < telepathPlayerComponent.deaths.size(); i++) {
+            TelepathPlayerComponent.TelepathDeath death = telepathPlayerComponent.deaths.get(i);
+
+            String text = "§c" + death.displayName + "§7 "
+                    + Text.translatable("hud.telepath.info").getString() + " "
+                    + Text.translatable("death_reason." + death.reason.getNamespace() + "." + death.reason.getPath()).getString();
+
+            context.drawTextWithShadow(getTextRenderer(), Text.of(text), 6, 26 + getTextRenderer().fontHeight * i, 0xFFFFFF);
+        }
     }
 }

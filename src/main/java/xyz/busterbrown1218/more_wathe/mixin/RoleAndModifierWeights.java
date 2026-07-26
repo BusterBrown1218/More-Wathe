@@ -28,7 +28,7 @@ import java.util.Random;
 public class RoleAndModifierWeights {
     @Inject(method = "initializeGame", at = @At(value = "HEAD"))
     private void checkPlayerCount(ServerWorld serverWorld, GameWorldComponent gameWorldComponent, List<ServerPlayerEntity> players, CallbackInfo ci) {
-        // sorry if this causes trouble to other mods that set role maximums
+        // sorry if this causes trouble to other mods that set role/modifier maximums
         if (players.size() < 8) {
             Harpymodloader.setRoleMaximum(MoreWathe.GUARDIAN_ANGEL, 0);
         } else {

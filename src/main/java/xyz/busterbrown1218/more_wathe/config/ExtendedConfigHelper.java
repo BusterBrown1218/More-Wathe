@@ -10,8 +10,10 @@ public class ExtendedConfigHelper {
 
     public static void setHideDisabledRoles(boolean value) {
         ConfigFile.HANDLER.instance().hideDisabledRoles = value;
+        ConfigFile.HANDLER.save();
     }
     public static void setHideDisabledModifiers(boolean value) {
         ConfigFile.HANDLER.instance().hideDisabledModifiers = value;
+        ConfigFile.HANDLER.save();
     }
 }

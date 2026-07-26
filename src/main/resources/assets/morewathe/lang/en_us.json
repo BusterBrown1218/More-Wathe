@@ -3,6 +3,7 @@
   "announcement.modifier.morewathe.locksmith": "Locksmith",
   "announcement.modifier.morewathe.fast": "Fast",
   "announcement.modifier.morewathe.warbled": "Warbled",
+  "announcement.modifier.morewathe.telepath": "Telepath",
 
   "announcement.goals.morewathe.escapist": "Easily get away from a kill",
   "announcement.role.morewathe.escapist": "Escapist",
@@ -33,5 +34,21 @@
   "tip.has_guardian_angel.protected": "You're shielded for %ss!",
   "tip.morewathe.cooldown": "Ability usable in %ss",
 
-  "key.morewathe.ability": "Ability"
+  "hud.telepath.info": "died to",
+
+  "key.morewathe.ability": "Ability",
+
+  "gui.watheextended.guidebook.role.desc.morewathe.escapist": "The Escapist is one of the most difficult killers to track down, being able to quickly disappear when a situation get heated.",
+  "gui.watheextended.guidebook.role.desc.morewathe.marksman": "A killer who brought their 2nd Amendment rights with them",
+  "gui.watheextended.guidebook.role.desc.morewathe.guardian_angel": "The Guardian Angel is truly neutral, only valuing the life of their randomly-assigned target.",
+
+  "gui.watheextended.guidebook.role.abilities.morewathe.escapist": "{icon:recall} §lEscape§r\nSet a escape point, then teleport back to it at any time on a cooldown.\n\n{icon:instinct} §lInstinct§r\nSee players and §4Killer Cohorts§r through walls.\n\n{icon:athletic} §lAthletic§r\nHas infinite stamina.",
+  "gui.watheextended.guidebook.role.abilities.morewathe.marksman": "{icon:instinct} §lInstinct§r\nSee players and §4Killer Cohorts§r through walls.\n\n{icon:athletic} §lAthletic§r\nHas infinite stamina.",
+  "gui.watheextended.guidebook.role.abilities.morewathe.guardian_angel": "{icon:judgement} §lDivine Intervention\nTemporarily grant's the guardian's target immunity from traditional attacks",
+
+  "gui.watheextended.guidebook.modifier.desc.morewathe.big": "For unclear reasons, you may find yourself larger than other players. No reason is considered canon.",
+  "gui.watheextended.guidebook.modifier.desc.morewathe.locksmith": "Killer exclusive modifier that grants a lockpick.\n\n§8\"Little click on 1... 2 is binding...\"",
+  "gui.watheextended.guidebook.modifier.desc.morewathe.fast": "Grants a small speed boost, allowing quicker escapes",
+  "gui.watheextended.guidebook.modifier.desc.morewathe.warbled": "If other players say you sound funny, it's probably just an issue with your mic",
+  "gui.watheextended.guidebook.modifier.desc.morewathe.telepath": "Killer exclusive modifier that alerts the killer when a cohort has commited murder"
 }

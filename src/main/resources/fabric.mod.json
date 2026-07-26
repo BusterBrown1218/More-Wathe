@@ -31,7 +31,8 @@
       "morewathe:config",
       "morewathe:ability",
       "morewathe:escapist",
-      "morewathe:guardian_angel"
+      "morewathe:guardian_angel",
+      "morewathe:telepath"
     ]
   },
   "mixins": [
