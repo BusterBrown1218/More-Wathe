@@ -25,7 +25,7 @@ public class PlayerDeathMixin {
     private static boolean playerDeath(AllowPlayerDeath instance, PlayerEntity victim, PlayerEntity killer, Identifier reason, Operation<Boolean> original) {
         boolean playerDead = original.call(instance, victim, killer, reason);
         if (!playerDead) return false;
-        if (killer == null) return false;
+        if (killer == null) return true;
         List<UUID> killerPlayers = GameWorldComponent.KEY.get(killer.getWorld()).getAllKillerTeamPlayers();
         if (killerPlayers.contains(killer.getUuid())) {
             killerPlayers.remove(killer.getUuid());
