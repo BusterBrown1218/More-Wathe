@@ -6,7 +6,9 @@ import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import dev.doctor4t.wathe.api.Role;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.minecraft.command.argument.IdentifierArgumentType;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import org.agmas.harpymodloader.commands.argument.ModifierArgumentType;
 import org.agmas.harpymodloader.commands.argument.RoleArgumentType;
 import org.agmas.harpymodloader.modifiers.Modifier;
@@ -82,6 +84,22 @@ public class ConfigCommands {
                                         context.getSource().sendFeedback(() -> Text.literal("guardianDefaultsToAmnesiac: " + value), true);
                                         return Command.SINGLE_SUCCESS;
                                     })))
+                    .then(literal("guardianProtectsDeath")
+                            .requires(source -> source.hasPermissionLevel(2))
+                            .then(argument("deathType", IdentifierArgumentType.identifier())
+                                    .then(argument("value", BoolArgumentType.bool())
+                                            .executes(context -> {
+                                                Identifier reason = IdentifierArgumentType.getIdentifier(context, "deathType");
+                                                boolean value = BoolArgumentType.getBool(context, "value");
+                                                if (value) {
+                                                    if (!ConfigFile.HANDLER.instance().protectedDeathReasons.contains(reason.toString())) ConfigFile.HANDLER.instance().protectedDeathReasons.add(reason.toString());
+                                                } else {
+                                                    ConfigFile.HANDLER.instance().protectedDeathReasons.remove(reason.toString());
+                                                }
+                                                ConfigFile.HANDLER.save();
+                                                context.getSource().sendFeedback(() -> Text.literal("Guardian protects " + reason.toString() + " set to " + value), true);
+                                                return Command.SINGLE_SUCCESS;
+                                            }))))
             );
         });
     }

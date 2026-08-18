@@ -21,6 +21,7 @@ import org.agmas.harpymodloader.events.ModifierAssigned;
 import org.agmas.harpymodloader.events.ResetPlayerEvent;
 import org.agmas.harpymodloader.modifiers.HMLModifiers;
 import org.agmas.harpymodloader.modifiers.Modifier;
+import org.agmas.noellesroles.Noellesroles;
 import xyz.busterbrown1218.more_wathe.components.AbilityPlayerComponent;
 import xyz.busterbrown1218.more_wathe.components.EscapistPlayerComponent;
 import xyz.busterbrown1218.more_wathe.components.GuardianAngelPlayerComponent;
@@ -28,6 +29,7 @@ import xyz.busterbrown1218.more_wathe.components.TelepathPlayerComponent;
 import xyz.busterbrown1218.more_wathe.config.ConfigCommands;
 import xyz.busterbrown1218.more_wathe.config.ConfigFile;
 import xyz.busterbrown1218.more_wathe.packet.AbilityC2SPacket;
+import xyz.busterbrown1218.more_wathe.util.DeathReasonLoader;
 
 import java.awt.*;
 import java.util.*;
@@ -49,7 +51,6 @@ public class MoreWathe implements ModInitializer {
     public static Role ESCAPIST = WatheRoles.registerRole(new Role(ESCAPIST_ID, new Color(170, 50, 50).getRGB(), false, true, Role.MoodType.FAKE, Integer.MAX_VALUE, true));
     public static Role MARKSMAN = WatheRoles.registerRole(new Role(MARKSMAN_ID, new Color(65, 15, 85).getRGB(), false, true, Role.MoodType.FAKE, Integer.MAX_VALUE, true));
     public static Role GUARDIAN_ANGEL = WatheRoles.registerRole(new Role(GUARDIAN_ANGEL_ID, new Color(250, 255, 150).getRGB(), false, false, Role.MoodType.REAL, WatheRoles.CIVILIAN.getMaxSprintTime(), false));
-    public static ArrayList<Identifier> protectedDeathReasons = new ArrayList<>(Arrays.asList(DeathReasons.BAT, DeathReasons.GRENADE, DeathReasons.GUN, DeathReasons.KNIFE, DeathReasons.POISON));
 
     public static Modifier BIG = HMLModifiers.registerModifier(new Modifier(BIG_ID, new Color(250, 233, 23).getRGB(), null ,null,false,false));
     public static Modifier LOCKSMITH = HMLModifiers.registerModifier(new Modifier(LOCKSMITH_ID, new Color(100, 25, 25).getRGB(), null,null,true,false));
@@ -64,6 +65,7 @@ public class MoreWathe implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        DeathReasonLoader.loadReasons();
         ConfigFile.HANDLER.load();
         registerAttributes();
         PayloadTypeRegistry.playC2S().register(AbilityC2SPacket.ID, AbilityC2SPacket.CODEC);
@@ -126,8 +128,7 @@ public class MoreWathe implements ModInitializer {
         });
         AllowPlayerDeath.EVENT.register((victim, killer, deathReason) -> {
             if (!(GuardianAngelPlayerComponent.KEY.get(victim).isProtected > 0)) return true;
-            // may later add modded death reasons, or config to choose which deaths are protected
-            return !protectedDeathReasons.contains(deathReason);
+            return !ConfigFile.HANDLER.instance().protectedDeathReasons.contains(deathReason.toString());
         });
 
         ServerPlayNetworking.registerGlobalReceiver(AbilityC2SPacket.ID, ((payload, context) -> {

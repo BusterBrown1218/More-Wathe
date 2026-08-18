@@ -23,6 +23,7 @@
   "gui.morewathe.config.category.options.roles.guardian_angel.killer_chance.desc": "Percent chance that the guardian angel is assigned a killer to protect\n\n§6Default: §750%",
   "gui.morewathe.config.category.options.roles.guardian_angel.guardianDefaultsToAmnesiac" : "Guardian Defaults to Amnesiac",
   "gui.morewathe.config.category.options.roles.guardian_angel.guardianDefaultsToAmnesiac.desc": "When disabled, guardians change to civilians if their target dies.\n\n§6Default: §aEnabled",
+  "gui.morewathe.config.category.options.roles.guardian_angel.guardianProtectsDeath": "Guardian ability prevents death to ",
 
   "tip.escapist.place": "Use %s to save your location!",
   "tip.escapist.teleport": "Use %s to teleport!",
@@ -50,5 +51,13 @@
   "gui.watheextended.guidebook.modifier.desc.morewathe.locksmith": "Killer exclusive modifier that grants a lockpick.\n\n§8\"Little click on 1... 2 is binding...\"",
   "gui.watheextended.guidebook.modifier.desc.morewathe.fast": "Grants a small speed boost, allowing quicker escapes",
   "gui.watheextended.guidebook.modifier.desc.morewathe.warbled": "If other players say you sound funny, it's probably just an issue with your mic",
-  "gui.watheextended.guidebook.modifier.desc.morewathe.telepath": "Killer exclusive modifier that alerts the killer when a cohort has commited murder"
+  "gui.watheextended.guidebook.modifier.desc.morewathe.telepath": "Killer exclusive modifier that alerts the killer when a cohort has commited murder",
+
+  "death_reason.wathe.gun_shot": "a bullet.",
+  "death_reason.wathe.knife_stab": "a knife!",
+  "death_reason.wathe.generic": "unknown causes.",
+  "death_reason.wathe.bat_hit": "blunt force!",
+  "death_reason.wathe.grenade": "an explosion!",
+  "death_reason.wathe.poison": "poison!",
+  "death_reason.wathe.fell_out_of_train": "being ran over."
 }

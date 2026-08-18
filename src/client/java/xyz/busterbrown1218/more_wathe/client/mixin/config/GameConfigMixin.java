@@ -11,11 +11,13 @@ import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.busterbrown1218.more_wathe.components.ConfigComponent;
+import xyz.busterbrown1218.more_wathe.util.DeathReasonLoader;
 
 import java.util.function.BiConsumer;
 
@@ -46,5 +48,12 @@ public class GameConfigMixin {
                 .binding(true, () -> ConfigComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).guardianDefaultsToAmnesiac, value -> sendCommand.accept("morewathe guardianDefaultsToAmnesiac " + value, parent))
                 .controller(option -> BooleanControllerBuilder.create(option).coloured(true))
                 .build());
+        for (Identifier deathReason : DeathReasonLoader.reasons) {
+            group.option(Option.<Boolean>createBuilder()
+                    .name(Text.translatable("gui.morewathe.config.category.options.roles.guardian_angel.guardianProtectsDeath").append(Text.translatable("death_reason." + deathReason.getNamespace() + "." + deathReason.getPath())))
+                    .binding(DeathReasonLoader.defaultProtections.contains(deathReason), () -> ConfigComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).protectedDeathReasons.contains(deathReason.toString()), value -> sendCommand.accept("morewathe guardianProtectsDeath " + deathReason + " " + value, parent))
+                    .controller(option -> BooleanControllerBuilder.create(option).coloured(true))
+                    .build());
+        }
     }
 }

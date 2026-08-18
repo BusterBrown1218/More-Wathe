@@ -10,8 +10,11 @@ import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
 import xyz.busterbrown1218.more_wathe.MoreWathe;
 import xyz.busterbrown1218.more_wathe.config.ConfigFile;
+import xyz.busterbrown1218.more_wathe.util.DeathReasonLoader;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ConfigComponent implements AutoSyncedComponent, ServerTickingComponent {
     public static final ComponentKey<ConfigComponent> KEY = ComponentRegistry.getOrCreate(Identifier.of(MoreWathe.MOD_ID, "config"), ConfigComponent.class);
@@ -30,6 +33,7 @@ public class ConfigComponent implements AutoSyncedComponent, ServerTickingCompon
     public boolean guardianDefaultsToAmnesiac = true;
     public HashMap<String, Double> modifierChances = new HashMap<>();
     public HashMap<String, Double> roleChances = new HashMap<>();
+    public List<String> protectedDeathReasons = new ArrayList<>();
 
     @Override
     public void readFromNbt(NbtCompound nbtCompound, RegistryWrapper.WrapperLookup wrapperLookup) {
@@ -44,6 +48,13 @@ public class ConfigComponent implements AutoSyncedComponent, ServerTickingCompon
                 roleChances.put(key.substring(11), nbtCompound.getDouble(key));
             }
         }
+
+        byte[] deathReasons = nbtCompound.getByteArray("deathReasons");
+        for (int i = 0; i < deathReasons.length; i++) {
+            String deathReason = DeathReasonLoader.reasons.get(i).toString();
+            if (deathReasons[i] == (byte) '1' && !protectedDeathReasons.contains(deathReason)) protectedDeathReasons.add(deathReason);
+            else if (deathReasons[i] == (byte) '0') protectedDeathReasons.remove(deathReason);
+        }
     }
 
     @Override
@@ -53,6 +64,7 @@ public class ConfigComponent implements AutoSyncedComponent, ServerTickingCompon
         guardianDefaultsToAmnesiac = ConfigFile.HANDLER.instance().guardianDefaultsToAmnesiac;
         modifierChances = ConfigFile.HANDLER.instance().modifierChances;
         roleChances = ConfigFile.HANDLER.instance().roleChances;
+        protectedDeathReasons = ConfigFile.HANDLER.instance().protectedDeathReasons;
 
         nbtCompound.putBoolean("hideMood", hideMood);
         nbtCompound.putInt("guardianKillerChance", guardianKillerChance);
@@ -63,5 +75,13 @@ public class ConfigComponent implements AutoSyncedComponent, ServerTickingCompon
         for (String id : roleChances.keySet()) {
             nbtCompound.putDouble("roleChance_" + id, roleChances.get(id));
         }
+
+        byte[] deathReasons = new byte[DeathReasonLoader.reasons.size()];
+        List<Identifier> reasons = DeathReasonLoader.reasons;
+        for (int i = 0; i < reasons.size(); i++) {
+            Identifier reason = reasons.get(i);
+            deathReasons[i] = (byte) (protectedDeathReasons.contains(reason.toString()) ? '1' : '0');
+        }
+        nbtCompound.putByteArray("deathReasons", deathReasons);
     }
 }
