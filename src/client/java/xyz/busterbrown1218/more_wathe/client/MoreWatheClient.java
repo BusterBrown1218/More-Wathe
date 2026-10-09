@@ -23,7 +23,6 @@ public class MoreWatheClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        ClientConfigCommands.registerCommands();
         registerAbility();
         registerAbilityPackets();
     }

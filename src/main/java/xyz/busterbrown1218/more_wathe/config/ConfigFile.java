@@ -26,10 +26,6 @@ public class ConfigFile {
     @SerialEntry
     public boolean preventOtherPlayersWakeup = true;
     @SerialEntry
-    public boolean hideDisabledRoles = true;
-    @SerialEntry
-    public boolean hideDisabledModifiers = true;
-    @SerialEntry
     public boolean hideMood = false;
     @SerialEntry
     public int guardianKillerChance = 50;

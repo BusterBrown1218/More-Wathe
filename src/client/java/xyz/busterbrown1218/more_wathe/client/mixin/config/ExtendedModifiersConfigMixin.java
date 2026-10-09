@@ -1,6 +1,6 @@
 package xyz.busterbrown1218.more_wathe.client.mixin.config;
 
-import cat.rezelyn.watheextended.api.hml.ModifiersDisplay;
+import cat.rezelyn.watheextended.api.ModifiersDisplay;
 import cat.rezelyn.watheextended.client.screen.config.ModifiersCategory;
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.isxander.yacl3.api.ConfigCategory;
@@ -22,9 +22,9 @@ import java.util.function.BiConsumer;
 @Mixin(ModifiersCategory.class)
 public class ExtendedModifiersConfigMixin {
     @Inject(method = "build", at = @At(value = "INVOKE", target = "Ldev/isxander/yacl3/api/OptionGroup$Builder;option(Ldev/isxander/yacl3/api/Option;)Ldev/isxander/yacl3/api/OptionGroup$Builder;", shift = At.Shift.AFTER))
-    private static void addChance(Screen parent, Map<String, Boolean> pendingState, BiConsumer<String, Screen> sendCommand, CallbackInfoReturnable<ConfigCategory> cir, @Local(name = "group") OptionGroup.Builder builder, @Local(name = "display")ModifiersDisplay.ModifierDisplay display, @Local(name = "modCurrentValue") boolean modCurrentValue) {
-        if (modCurrentValue) builder.option(Option.<Double>createBuilder()
-                .name(Text.literal(display.display().getString() + " Chance").withColor(display.color()))
+    private static void addChance(Screen parent, Map<String, Boolean> pendingState, BiConsumer<String, Screen> sendCommand, CallbackInfoReturnable<ConfigCategory> cir, @Local(name = "group") OptionGroup.Builder builder, @Local(name = "display") ModifiersDisplay.ModifierDisplay display, @Local(name = "state") boolean state) {
+        if (state) builder.option(Option.<Double>createBuilder()
+                .name(Text.literal(display.display().getString() + " Chance"))
                 .binding(
                         1.0,
                         () -> ConfigComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).modifierChances.getOrDefault(display.id(), 1.0),

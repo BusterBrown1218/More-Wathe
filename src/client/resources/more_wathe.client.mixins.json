@@ -5,12 +5,9 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "GameHudMixin",
-    "HideDisabledMixin",
     "MoodRenderMixin",
-    "config.ExtendedClientConfigMixin",
     "config.ExtendedModifiersConfigMixin",
     "config.ExtendedRolesConfigMixin",
-    "config.ExtendedScreenMixin",
     "config.GameConfigMixin"
   ],
   "injectors": {
