@@ -10,9 +10,6 @@
   "icon": "assets/more_wathe/icon.png",
   "environment": "*",
   "entrypoints": {
-    "fabric-datagen": [
-      "xyz.busterbrown1218.more_wathe.client.MoreWatheDataGenerator"
-    ],
     "client": [
       "xyz.busterbrown1218.more_wathe.client.MoreWatheClient"
     ],
@@ -32,7 +29,9 @@
       "morewathe:ability",
       "morewathe:escapist",
       "morewathe:guardian_angel",
-      "morewathe:telepath"
+      "morewathe:telepath",
+      "morewathe:footstep",
+      "morewathe:investigator"
     ]
   },
   "mixins": [

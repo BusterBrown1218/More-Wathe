@@ -8,11 +8,10 @@ import org.jetbrains.annotations.NotNull;
 import org.ladysnake.cca.api.v3.component.ComponentKey;
 import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
-import org.ladysnake.cca.api.v3.component.tick.ClientTickingComponent;
 import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
 import xyz.busterbrown1218.more_wathe.MoreWathe;
 
-public class EscapistPlayerComponent implements AutoSyncedComponent, ServerTickingComponent, ClientTickingComponent {
+public class EscapistPlayerComponent implements AutoSyncedComponent, ServerTickingComponent {
     public static final ComponentKey<EscapistPlayerComponent> KEY = ComponentRegistry.getOrCreate(Identifier.of(MoreWathe.MOD_ID, "escapist"), EscapistPlayerComponent.class);
     private final PlayerEntity player;
     public boolean placed = false;
@@ -36,9 +35,6 @@ public class EscapistPlayerComponent implements AutoSyncedComponent, ServerTicki
         KEY.sync(this.player);
     }
 
-    public void clientTick() {
-    }
-
     public void serverTick() {
         this.sync();
     }
@@ -50,7 +46,6 @@ public class EscapistPlayerComponent implements AutoSyncedComponent, ServerTicki
         placed = true;
         this.sync();
     }
-
 
     public void teleport() {
         player.refreshPositionAfterTeleport(x,y,z);

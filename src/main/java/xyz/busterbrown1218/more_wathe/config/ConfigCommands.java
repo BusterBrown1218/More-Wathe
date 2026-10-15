@@ -100,6 +100,16 @@ public class ConfigCommands {
                                                 context.getSource().sendFeedback(() -> Text.literal("Guardian protects " + reason.toString() + " set to " + value), true);
                                                 return Command.SINGLE_SUCCESS;
                                             }))))
+                    .then(literal("maxFootprints")
+                            .requires(source -> source.hasPermissionLevel(2))
+                            .then(argument("num", IntegerArgumentType.integer(1, 200))
+                                    .executes(context -> {
+                                        int num = IntegerArgumentType.getInteger(context, "num");
+                                        ConfigFile.HANDLER.instance().maxFootprints = num;
+                                        ConfigFile.HANDLER.save();
+                                        context.getSource().sendFeedback(() -> Text.literal("maxFootprints: " + num), true);
+                                        return Command.SINGLE_SUCCESS;
+                                    })))
             );
         });
     }

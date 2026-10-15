@@ -5,25 +5,24 @@
   "announcement.modifier.morewathe.warbled": "Warbled",
   "announcement.modifier.morewathe.telepath": "Telepath",
 
-  "announcement.goals.morewathe.escapist": "Easily get away from a kill",
   "announcement.role.morewathe.escapist": "Escapist",
-  "announcement.goals.morewathe.marksman": "Pose as a vigilante",
+  "announcement.goals.morewathe.escapist": "Easily get away from a kill",
   "announcement.role.morewathe.marksman": "Marksman",
+  "announcement.goals.morewathe.marksman": "Pose as a vigilante",
   "announcement.role.morewathe.guardian_angel": "Guardian Angel",
   "announcement.goals.morewathe.guardian_angel": "Don't let your player die!",
+  "announcement.role.morewathe.investigator": "Investigator",
+  "announcement.goals.morewathe.investigator": "Follow footprints to find the killer",
 
-  "gui.morewathe.config.category.client.opt.hideDisabledRoles": "Hide Disabled Roles",
-  "gui.morewathe.config.category.client.opt.hideDisabledRoles.desc": "Prevents the guidebook from showing roles that are currently disabled.",
-  "gui.morewathe.config.category.client.opt.hideDisabledModifiers": "Hide Disabled Modifiers",
-  "gui.morewathe.config.category.client.opt.hideDisabledModifiers.desc": "Prevents the guidebook from showing modifiers that are currently disabled.",
   "gui.morewathe.config.category.options.opt.hideMood": "Hide Mood",
   "gui.morewathe.config.category.options.opt.hideMood.desc": "When disabled, players may only see their objectives, not their sanity.\n\n§6Default: §cDisabled",
-  "gui.morewathe.config.category.options.roles.guardian_angel.group": "Guardian Angel",
   "gui.morewathe.config.category.options.roles.guardian_angel.killer_chance": "Guardian Killer Chance",
   "gui.morewathe.config.category.options.roles.guardian_angel.killer_chance.desc": "Percent chance that the guardian angel is assigned a killer to protect\n\n§6Default: §750%",
   "gui.morewathe.config.category.options.roles.guardian_angel.guardianDefaultsToAmnesiac" : "Guardian Defaults to Amnesiac",
   "gui.morewathe.config.category.options.roles.guardian_angel.guardianDefaultsToAmnesiac.desc": "When disabled, guardians change to civilians if their target dies.\n\n§6Default: §aEnabled",
   "gui.morewathe.config.category.options.roles.guardian_angel.guardianProtectsDeath": "Guardian ability prevents death to ",
+  "gui.morewathe.config.category.options.roles.investigator.maxFootprints": "Max Footprints",
+  "gui.morewathe.config.category.options.roles.investigator.maxFootprints.desc": "Determines how many footprints the Investigator can see at once. The more there are, the longer it will take for a footprint to disappear.\n\n§6Default: §730",
 
   "tip.escapist.place": "Use %s to save your location!",
   "tip.escapist.teleport": "Use %s to teleport!",
@@ -34,6 +33,7 @@
   "tip.has_guardian_angel": "You have a guardian angel!",
   "tip.has_guardian_angel.protected": "You're shielded for %ss!",
   "tip.morewathe.cooldown": "Ability usable in %ss",
+  "tip.investigator.observe": "Observing %s's footprints!",
 
   "hud.telepath.info": "died to",
 
@@ -42,10 +42,12 @@
   "gui.watheextended.guidebook.role.desc.morewathe.escapist": "The Escapist is one of the most difficult killers to track down, being able to quickly disappear when a situation get heated.",
   "gui.watheextended.guidebook.role.desc.morewathe.marksman": "A killer who brought their 2nd Amendment rights with them",
   "gui.watheextended.guidebook.role.desc.morewathe.guardian_angel": "The Guardian Angel is truly neutral, only valuing the life of their randomly-assigned target.",
+  "gui.watheextended.guidebook.role.desc.morewathe.investigator": "The Investigator can use their observational skills to find the path of another player",
 
   "gui.watheextended.guidebook.role.abilities.morewathe.escapist": "{icon:recall} §lEscape§r\nSet a escape point, then teleport back to it at any time on a cooldown.\n\n{icon:instinct} §lInstinct§r\nSee players and §4Killer Cohorts§r through walls.\n\n{icon:athletic} §lAthletic§r\nHas infinite stamina.",
   "gui.watheextended.guidebook.role.abilities.morewathe.marksman": "{icon:instinct} §lInstinct§r\nSee players and §4Killer Cohorts§r through walls.\n\n{icon:athletic} §lAthletic§r\nHas infinite stamina.",
-  "gui.watheextended.guidebook.role.abilities.morewathe.guardian_angel": "{icon:judgement} §lDivine Intervention\nTemporarily grant's the guardian's target immunity from traditional attacks",
+  "gui.watheextended.guidebook.role.abilities.morewathe.guardian_angel": "{icon:judgement} §lDivine Intervention\nTemporarily grant's the guardian's target immunity from traditional attacks.",
+  "gui.watheextended.guidebook.role.abilities.morewathe.investigator": "{icon:instinct} §lObserve\nChoose a player to view the footsteps of.",
 
   "gui.watheextended.guidebook.modifier.desc.morewathe.big": "For unclear reasons, you may find yourself larger than other players. No reason is considered canon.",
   "gui.watheextended.guidebook.modifier.desc.morewathe.locksmith": "Killer exclusive modifier that grants a lockpick.\n\n§8\"Little click on 1... 2 is binding...\"",

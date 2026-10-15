@@ -20,10 +20,7 @@ import org.agmas.harpymodloader.events.ModifierAssigned;
 import org.agmas.harpymodloader.events.ResetPlayerEvent;
 import org.agmas.harpymodloader.modifiers.HMLModifiers;
 import org.agmas.harpymodloader.modifiers.Modifier;
-import xyz.busterbrown1218.more_wathe.components.AbilityPlayerComponent;
-import xyz.busterbrown1218.more_wathe.components.EscapistPlayerComponent;
-import xyz.busterbrown1218.more_wathe.components.GuardianAngelPlayerComponent;
-import xyz.busterbrown1218.more_wathe.components.TelepathPlayerComponent;
+import xyz.busterbrown1218.more_wathe.components.*;
 import xyz.busterbrown1218.more_wathe.config.ConfigCommands;
 import xyz.busterbrown1218.more_wathe.config.ConfigFile;
 import xyz.busterbrown1218.more_wathe.packet.AbilityC2SPacket;
@@ -39,6 +36,7 @@ public class MoreWathe implements ModInitializer {
     public static Identifier ESCAPIST_ID = Identifier.of(MOD_ID, "escapist");
     public static Identifier MARKSMAN_ID = Identifier.of(MOD_ID, "marksman");
     public static Identifier GUARDIAN_ANGEL_ID = Identifier.of(MOD_ID, "guardian_angel");
+    public static Identifier INVESTIGATOR_ID = Identifier.of(MOD_ID, "investigator");
 
     public static Identifier BIG_ID = Identifier.of(MOD_ID, "big");
     public static Identifier LOCKSMITH_ID = Identifier.of(MOD_ID, "locksmith");
@@ -49,6 +47,7 @@ public class MoreWathe implements ModInitializer {
     public static Role ESCAPIST = WatheRoles.registerRole(new Role(ESCAPIST_ID, new Color(170, 50, 50).getRGB(), false, true, Role.MoodType.FAKE, Integer.MAX_VALUE, true));
     public static Role MARKSMAN = WatheRoles.registerRole(new Role(MARKSMAN_ID, new Color(65, 15, 85).getRGB(), false, true, Role.MoodType.FAKE, Integer.MAX_VALUE, true));
     public static Role GUARDIAN_ANGEL = WatheRoles.registerRole(new Role(GUARDIAN_ANGEL_ID, new Color(250, 255, 150).getRGB(), false, false, Role.MoodType.REAL, WatheRoles.CIVILIAN.getMaxSprintTime(), false));
+    public static Role INVESTIGATOR = WatheRoles.registerRole(new Role(INVESTIGATOR_ID, new Color(20, 80, 20).getRGB(), true, false, Role.MoodType.REAL, WatheRoles.CIVILIAN.getMaxSprintTime(), false));
 
     public static Modifier BIG = HMLModifiers.registerModifier(new Modifier(BIG_ID, new Color(250, 233, 23).getRGB(), null ,null,false,false));
     public static Modifier LOCKSMITH = HMLModifiers.registerModifier(new Modifier(LOCKSMITH_ID, new Color(100, 25, 25).getRGB(), null,null,true,false));
@@ -116,6 +115,8 @@ public class MoreWathe implements ModInitializer {
                 protectedComponent.sync();
             } else if (role.equals(ESCAPIST)) {
                 EscapistPlayerComponent.KEY.get(playerEntity).reset();
+            } else if (role.equals(INVESTIGATOR)) {
+                InvestigatorPlayerComponent.KEY.get(playerEntity).reset();
             }
         });
         ResetPlayerEvent.EVENT.register(playerEntity -> {
@@ -123,6 +124,7 @@ public class MoreWathe implements ModInitializer {
             playerEntity.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).removeModifier(fastModifier);
             GuardianAngelPlayerComponent.KEY.get(playerEntity).reset();
             TelepathPlayerComponent.KEY.get(playerEntity).reset();
+            FootprintPlayerComponent.KEY.get(playerEntity).reset();
         });
         AllowPlayerDeath.EVENT.register((victim, killer, deathReason) -> {
             if (!(GuardianAngelPlayerComponent.KEY.get(victim).isProtected > 0)) return true;
@@ -161,6 +163,9 @@ public class MoreWathe implements ModInitializer {
                 abilityComponent.cooldown = GameConstants.getInTicks(1, 0);
                 guardianComponent.startProtecting();
             }
+        } else if (gameWorldComponent.isRole(player, INVESTIGATOR)) {
+            InvestigatorPlayerComponent investigatorComponent = InvestigatorPlayerComponent.KEY.get(player);
+            investigatorComponent.cycleInvestigatedPlayer();
         }
     }
 }

@@ -37,4 +37,6 @@ public class ConfigFile {
     public HashMap<String, Double> roleChances = new HashMap<String, Double>();
     @SerialEntry
     public List<String> protectedDeathReasons = new ArrayList<>(DeathReasonLoader.defaultProtections.stream().map(Identifier::toString).collect(Collectors.toSet()));
+    @SerialEntry
+    public int maxFootprints = 30;
 }

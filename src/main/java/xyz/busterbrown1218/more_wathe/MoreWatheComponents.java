@@ -22,5 +22,7 @@ public class MoreWatheComponents implements EntityComponentInitializer, WorldCom
         registry.beginRegistration(PlayerEntity.class, AbilityPlayerComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(AbilityPlayerComponent::new);
         registry.beginRegistration(PlayerEntity.class, GuardianAngelPlayerComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(GuardianAngelPlayerComponent::new);
         registry.beginRegistration(PlayerEntity.class, TelepathPlayerComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(TelepathPlayerComponent::new);
+        registry.beginRegistration(PlayerEntity.class, FootprintPlayerComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(FootprintPlayerComponent::new);
+        registry.beginRegistration(PlayerEntity.class, InvestigatorPlayerComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(InvestigatorPlayerComponent::new);
     }
 }

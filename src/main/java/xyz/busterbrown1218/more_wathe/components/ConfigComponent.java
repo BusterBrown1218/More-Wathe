@@ -34,6 +34,7 @@ public class ConfigComponent implements AutoSyncedComponent, ServerTickingCompon
     public HashMap<String, Double> modifierChances = new HashMap<>();
     public HashMap<String, Double> roleChances = new HashMap<>();
     public List<String> protectedDeathReasons = new ArrayList<>();
+    public int maxFootprints = 30;
 
     @Override
     public void readFromNbt(NbtCompound nbtCompound, RegistryWrapper.WrapperLookup wrapperLookup) {
@@ -55,6 +56,8 @@ public class ConfigComponent implements AutoSyncedComponent, ServerTickingCompon
             if (deathReasons[i] == (byte) '1' && !protectedDeathReasons.contains(deathReason)) protectedDeathReasons.add(deathReason);
             else if (deathReasons[i] == (byte) '0') protectedDeathReasons.remove(deathReason);
         }
+
+        if (nbtCompound.contains("maxFootprints")) maxFootprints = nbtCompound.getInt("maxFootprints");
     }
 
     @Override
@@ -65,6 +68,7 @@ public class ConfigComponent implements AutoSyncedComponent, ServerTickingCompon
         modifierChances = ConfigFile.HANDLER.instance().modifierChances;
         roleChances = ConfigFile.HANDLER.instance().roleChances;
         protectedDeathReasons = ConfigFile.HANDLER.instance().protectedDeathReasons;
+        maxFootprints = ConfigFile.HANDLER.instance().maxFootprints;
 
         nbtCompound.putBoolean("hideMood", hideMood);
         nbtCompound.putInt("guardianKillerChance", guardianKillerChance);
@@ -83,5 +87,6 @@ public class ConfigComponent implements AutoSyncedComponent, ServerTickingCompon
             deathReasons[i] = (byte) (protectedDeathReasons.contains(reason.toString()) ? '1' : '0');
         }
         nbtCompound.putByteArray("deathReasons", deathReasons);
+        nbtCompound.putInt("maxFootprints", maxFootprints);
     }
 }

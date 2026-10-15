@@ -10,6 +10,7 @@ import dev.isxander.yacl3.api.OptionGroup;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.DoubleSliderControllerBuilder;
 import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder;
+import dev.isxander.yacl3.gui.controllers.slider.IntegerSliderController;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
@@ -68,6 +69,14 @@ public class ExtendedRolesConfigMixin {
                                 .controller(option -> BooleanControllerBuilder.create(option).coloured(true))
                                 .build());
                     }
+                    break;
+                case "morewathe:investigator":
+                    builder.option(Option.<Integer>createBuilder()
+                            .name(Text.translatable("gui.morewathe.config.category.options.roles.investigator.maxFootprints"))
+                            .description(OptionDescription.of(Text.translatable("gui.morewathe.config.category.options.roles.investigator.maxFootprints.desc").styled(style -> style.withColor(16777215))))
+                            .binding(30, () -> ConfigComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).maxFootprints, value -> sendCommand.accept("morewathe maxFootprints " + value, parent))
+                            .controller(option -> IntegerSliderControllerBuilder.create(option).range(1, 200).step(1))
+                            .build());
                     break;
             }
         }
